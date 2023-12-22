@@ -1,0 +1,36 @@
+{% extends "users/base.html" %}
+{% load static %}
+ 
+{% block title %} Home Page {% endblock title%}
+{% block css %}
+<link rel="stylesheet" href="{% static 'styles/home.css' %}">
+{% endblock %}
+{% block content %}
+    <div class="jumbotron bg-light text-center">
+        {% if user.is_authenticated %}
+        <h1 class="display-4">Welcome, {{user.first_name.title|default:'Guest'}}</h1>
+        {% endif %}
+        <h2 class="marker-line">It matters <span class="highlight">How you Learn</span></h2>
+ 
+        <p class="lead">
+            <b>Assessments, instructions, and practice that motivate every learner to mastery</b>
+        </p>
+        <hr class="my-4">
+        <p class="lead">
+            {% if user.is_authenticated %}
+                <a class="btn btn-outline-success mt-2 mx-1" href="{% url 'quiz_list'%}" role="button">Challenges</a>
+                <a class="btn btn-outline-warning mt-2 mx-1" href="{% url 'leaderboard'%}" role="button">Leaderboard</a>
+                {% if user.is_staff or user.is_superuser %}
+                    <a class="btn btn-outline-info mt-2 mx-1" href="{% url 'add-quiz' %}" role="button">Add Quiz</a>
+                    <a class="btn btn-outline-danger mt-2 mx-1" href="{% url 'quiz_list1' %}" role="button">Review Challenges</a>
+                {% endif %}
+                
+            {% else %}
+                <a class="btn btn-success mt-2 mx-1" href="{% url 'login' %}" role="button">Sign in</a>
+                <a class="btn btn-warning mt-2 mx-1" href="{% url 'users-register' %}" role="button">User Signup</a>
+                <a class="btn btn-info mt-2 mx-1" href="{% url 'staff_signup' %}" role="button">Mentor Signup</a>
+                
+            {% endif %}
+        </p>
+    </div>
+{% endblock %}

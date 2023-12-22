@@ -1,0 +1,56 @@
+{% extends 'users/base.html' %}
+ 
+{% load static %}
+ 
+{% block title %}
+Contact Us
+{% endblock %}
+ 
+{% block css %}
+<link rel="stylesheet" href="{% static 'styles/contact_us.css' %}">
+{% endblock %}
+ 
+{% block content %}
+<div class="contact">
+    <div class="wrap">
+        <form action="" class="contact-form">
+            {% csrf_token %}
+            <span class="form-title">Hello!</span>
+ 
+            <div class="wrap-input">
+                <span class="label-input">Your Name</span>
+                <input type="text" name="name"
+                    placeholder="Enter Your Name"
+                    class="input1">
+            </div>
+ 
+            <div class="wrap-input">
+                <span class="label-input">Email</span>
+                <input type="email" name="email"
+                    placeholder="Enter Your Email Address"
+                    class="input1">
+            </div>
+ 
+            <div class="wrap-input">
+                <span class="label-input">Message</span>
+                <textarea type="text" name="message" rows="2"
+                    class="input-area input1"
+                    placeholder="Your Message here..."
+                    spellcheck="false"></textarea>
+            </div>
+            <div class="contact form-btn">
+                <button class="btn-submit contact">
+                    <strong>Submit</strong>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+ 
+{% endblock %}
+ 
+ 
+ 
+
+ 
+ 

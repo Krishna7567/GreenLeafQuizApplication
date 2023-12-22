@@ -1,0 +1,72 @@
+{% extends 'users/base.html' %}
+
+{% block content %}
+<h1>Quiz Management</h1>
+
+<!-- Add Quiz -->
+<h2>Add Quiz</h2>
+<form method="post" action="{% url 'add-quiz' %}">
+  {% csrf_token %}
+  {{ quiz_form.as_p }}
+  <input type="submit" value="Add Quiz">
+</form>
+
+<hr>
+
+<!-- List Quizzes -->
+<h2>Quizzes</h2>
+{% if quizzes %}
+  <ul>
+  {% for quiz in quizzes %}
+    <li>
+      {{ quiz.title }}
+      <a href="{% url 'update_quiz' quiz.id %}">Edit</a>
+      <a href="{% url 'delete_quiz' quiz.id %}" onclick="return confirm('Are you sure you want to delete this quiz?')">Delete</a>
+    </li>
+  {% endfor %}
+  </ul>
+{% else %}
+  <p>No quizzes found.</p>
+{% endif %}
+
+<hr>
+
+<!-- Add Question -->
+{% if quizzes %}
+  <h2>Add Question</h2>
+  <form method="post" action="{% url 'add_question' quiz.id %}">
+    {% csrf_token %}
+    {{ question_form.as_p }}
+    <input type="submit" value="Add Question">
+  </form>
+{% endif %}
+
+<hr>
+
+<!-- List Questions -->
+{% if questions %}
+  <h2>Questions</h2>
+  <ul>
+  {% for question in questions %}
+    <li>
+      {{ question.text }}
+      <a href="{% url 'update_question' question.id %}">Edit</a>
+      <a href="{% url 'delete_question' question.id %}" onclick="return confirm('Are you sure you want to delete this question?')">Delete</a>
+      {% if question.answers %}
+        <ul>
+        {% for answer in question.answers %}
+          <li>{{ answer.text }} ({{ answer.is_correct|yesno:"Yes,No" }})</li>
+          <a href="{% url 'update_answer' answer.id %}">Edit</a>
+          <a href="{% url 'delete_answer' answer.id %}" onclick="return confirm('Are you sure you want to delete this answer?')">Delete</a>
+        {% endfor %}
+        </ul>
+      {% else %}
+        <p>No answers found.</p>
+      {% endif %}
+    </li>
+  {% endfor %}
+  </ul>
+{% else %}
+  <p>No questions found.</p>
+{% endif %}
+{% endblock %}

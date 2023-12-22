@@ -1,0 +1,81 @@
+{% extends "users/base.html" %}
+{% load static %}
+{% block title %} Results {% endblock title%}
+{% block css %}
+<link rel="stylesheet" href="{% static 'styles/results.css' %}">
+{% endblock %}
+{% block content %}
+<div class="jumbotron bg-light text-left">
+    <link rel="stylesheet"
+        href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <div class="container mt-5">
+        <div class="card shadow-lg p-3 mb-5 bg-white rounded">
+            <div class="card-body">
+                <h1 class="text-center">{{ quiz.name }} - Result</h1>
+                <p>Total marks for this quiz: {{ total_marks }}</p>
+                {% if quiz_results %}
+                <div class="text-center">
+
+                </div>
+                <ul class="list-group list-group-flush">
+                    {% for quiz_result in quiz_results %}
+                    <li class="list-group-item text-center"><strong>Your score: {{ quiz_result.score }} Marks</strong></li>
+                    {% endfor %}
+                </ul>
+                {% if quiz_results.0.score == total_marks %}
+                <div class="text-center mt-4">
+                    <i class="fas fa-5x fa-trophy text-success"></i>
+                    <p class="mt-3">Congratulations! You got a perfect score!</p>
+                </div>
+                {% endif %}
+                {% else %}
+                <p class="text-center">You haven't taken this quiz yet.</p>
+                {% endif %}
+            </div>
+        </div>
+
+        <!-- Display explanations for each question -->
+        {% if questions %}
+        <div class="mt-5">
+            {% for question in questions %}
+            <div class="card mb-3">
+                <div class="card-body">
+                    <h4 class="card-title">Question: {{ question.text }}</h4>
+                    <div class="text-right">
+                        <strong>Marks {{ question.marks }}</strong>
+                    </div>
+                    <p class="card-text">Explanation: {{ question.explanation }}</p>
+                    <!-- <p class="card-text">Read more: {{ question.lmore }}</p> -->
+                    <details>
+                        <summary>Read More: </summary>
+                        {% if 'http' in question.lmore %}
+                        <p>{{ question.lmore|urlize|safe }}</p>
+                        {% else %}
+                        <p>{{ question.lmore }}</p>
+                        {% endif %}
+                    </details>
+                    {% for answer in question.answer_set.all %}
+                    {% if answer.is_correct == 1 %}
+                    <p class="card-text correct-answer"><i class="fas fa-check-circle"></i> Correct Answer: {{ answer.text }}</p>
+                    {% endif %}
+                    {% endfor %}
+                    {% for quiz_response in quiz_responses %}
+                    {% if question.id == quiz_response.question_id %}
+                    {% if quiz_response.answer.is_correct == 1 %}
+                        <p class="card-text correct-answer"><i class="fas fa-check-circle"></i> You Answered: {{ quiz_response.answer.text }}</p>
+                    {% else %}
+                        <p class="card-text incorrect-answer"><i class="fas fa-times-circle"></i> You Answered: {{ quiz_response.answer.text }}</p>
+                    {% endif %}
+                    {% endif %}
+                    {% endfor %}
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        {% endif %}
+    </div>
+</div>
+
+{% endblock content %}

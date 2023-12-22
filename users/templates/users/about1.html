@@ -1,0 +1,21 @@
+{% extends "users/base.html" %}
+{% load static%}
+
+{% block title %}About{% endblock title %}
+
+
+{% block css %}
+    <link rel="stylesheet" href="{% static 'styles/about1.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="outer">
+    <div class="wrap">
+        <span class="contact-title">About Us</span>
+        <div>
+            <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Iure fugiat quis incidunt excepturi modi ad perspiciatis dolorem non doloribus id libero consequuntur esse expedita corrupti, a totam laborum in provident, amet suscipit illo cumque sit. Adipisci deleniti enim dolor accusamus quasi deserunt corrupti, unde doloribus possimus labore, nobis, sit magnam.</p>
+        </div>
+
+    </div>
+</div>
+{% endblock %}

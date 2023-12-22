@@ -1,0 +1,79 @@
+{% extends 'users/base.html' %}
+{% block title %} Add Question {% endblock title%}
+{% block content %}
+<div class="jumbotron bg-light text-left">
+  <h1 class="display-4">Welcome, {{ user.first_name|default:'Guest' }}</h1>
+  <hr class="my-4">
+  <h2>Add Question to {{ quiz.name }}</h2>
+  <form method="post" id="questionForm">
+    {% csrf_token %}
+    <div class="form-group">
+      <label for="{{ form.text.id_for_label }}">Question Text:</label>
+      {{ form.text }}
+    </div>
+    <div class="form-group">
+      <label for="{{ form.explanation.id_for_label }}">Explanation:</label>
+      {{ form.explanation }}
+    </div>
+    <div class="form-group">
+      <label for="{{ form.explanation.id_for_label }}">Read more Learning Material:</label>
+      {{ form.lmore }}
+    </div>
+    <div class="form-group">
+      <label for="{{ form.marks.id_for_label }}">Marks:</label>
+      {{ form.marks }}
+    </div>
+    <button class="btn btn-primary" type="button" id="previewButton" data-toggle="modal" data-target="#previewModal">Preview</button>
+    <button class="btn btn-primary" type="submit">Add Question</button>
+  </form>
+</div>
+
+<!-- Preview Modal -->
+<div class="modal fade" id="previewModal" tabindex="-1" role="dialog" aria-labelledby="previewModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="previewModalLabel">Preview Question:</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p><strong>Question Text:</strong> <span id="previewText"></span></p>
+        <p><strong>Explanation:</strong> <span id="previewExplanation"></span></p>
+        <p><strong>Read more Learning Material:</strong> <span id="previewLmore"></span></p>
+        <p><strong>Marks:</strong> <span id="previewMarks"></span></p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" onclick="addQuestion()">Add Question</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  document.getElementById("previewButton").addEventListener("click", function() {
+    // Get form data
+    var questionText = document.getElementById("id_text").value;
+    var explanation = document.getElementById("id_explanation").value;
+    var lmore = document.getElementById("id_lmore").value;
+    var marks = document.getElementById("id_marks").value;
+
+    // Populate the preview modal with the preview content
+    document.getElementById("previewText").innerText = questionText;
+    document.getElementById("previewExplanation").innerText = explanation;
+    document.getElementById("previewLmore").innerText = lmore;
+    document.getElementById("previewMarks").innerText = marks;
+  });
+
+  // Function to be executed when "Add Question" button is clicked in the modal
+  function addQuestion() {
+    // You can perform additional actions here before submitting the form, if needed.
+    // For example, you can update the form action URL or perform client-side validation.
+
+    // Submit the form in the main window
+    document.getElementById("questionForm").submit();
+  }
+</script>
+{% endblock content %}

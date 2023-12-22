@@ -1,0 +1,35 @@
+.nav-link:hover .fas {
+        transform: rotate(360deg);
+        transition: transform 0.5s ease;
+    }
+    /* Make the navbar transparent */
+.navbar {
+  background-color: transparent;
+  box-shadow: none;
+}
+
+/* Add a background color on hover */
+/* .navbar-nav li.nav-item:hover {
+  background-color: #f1f1f1;
+} */
+
+/* Add some hover effects to the icons */
+.nav-link .fas {
+  transform: rotate(0deg);
+  transition: transform 0.3s ease-in-out;
+}
+
+.nav-link:hover .fas {
+  transform: rotate(360deg);
+}
+
+/* Add toggle effect on hover */
+.navbar-toggler-icon {
+  transition: transform 0.3s ease-in-out;
+}
+
+.navbar-toggler:hover .navbar-toggler-icon {
+  transform: rotate(90deg);
+}
+
+

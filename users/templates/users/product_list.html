@@ -1,0 +1,28 @@
+{% extends "users/base.html" %}
+{% load static %}
+
+{% block title %} Product List {% endblock title %}
+{% block content %}
+<div class="container">
+    {% for product in products %}
+        <h1 class="display-4">{{ product.name }}</h1>
+
+        {% if user_price_form %}
+            <form method="post">
+                {% csrf_token %}
+                {{ user_price_form.as_p }}
+                <input type="hidden" name="product" value="{{ product.pk }}">
+                <button type="submit">Submit Price</button>
+            </form>
+        {% endif %}
+
+        {% if user_prices %}
+            {% for user_product_id, user_price in user_prices %}
+                {% if user_product_id == product.pk %}
+                    <h3>Your Price: {{ user_price }}</h3>
+                {% endif %}
+            {% endfor %}
+        {% endif %}
+    {% endfor %}
+</div>
+{% endblock %}

@@ -1,0 +1,224 @@
+{% extends "users/base.html" %}
+{% block title %}About{% endblock title %}
+{% block content %}
+<br>
+<link rel="stylesheet" href="/static/styles/about.css">
+
+<body>
+    <!-- <div class="gl-sand gl-grayscale gl-large"> -->
+    <div class="gl-large">
+    
+        <!-- About Container -->
+        <div class="gl-container make-center" id="about">
+            <!-- <div class="gl-content" style="max-width:700px"> -->
+            <h1 class="display-4">
+                <center>About Green Leaf</center>
+            </h1>
+            <p>Welcome to GreenLeaf, a platform designed to simplify the process of testing and assessing
+                knowledge for mentors and managers. Our objective is to provide an easy-to-use platform that empowers
+                mentors to gauge the skill levels of their mentees or employees, enabling them to assign appropriate
+                tasks and track progress effectively. <br>
+
+                At GreenLeaf, mentors have the ability to create and upload custom questions tailored to the specific
+                technologies they are teaching. This allows mentees to attempt these questions and showcase their
+                understanding. By assessing the mentees' proficiency and skill levels, mentors can assign tasks that are
+                challenging yet suitable for individual growth. <br>
+
+                One of the key features of our platform is the common leaderboard. It serves as a hub for mentors and
+                mentees to track and compare the performance of all participants. Mentees can strive for a better rank
+                among their peers, fostering healthy competition and encouraging continuous improvement.
+                <br>
+                We understand the challenges faced by mentors when managing quiz results manually. The task is not only
+                time-consuming but also prone to errors in calculation and tracking of questions and answers. To address
+                this challenge, we have developed an online quiz system as part of our Minimum Viable Product (MVP1).
+                With GreenLeaf, you can say goodbye to the margin of error associated with manual quiz result
+                management.
+                <br>
+                Join us at GreenLeaf and experience a seamless, error-free platform that streamlines the testing and
+                assessment process for mentors and managers.
+            </p>
+            <!-- </div> -->
+        </div>
+
+        <!-- Menu Container -->
+        <div class="gl-container" id="menu">
+            <div class="gl-content" style="max-width:700px">
+
+                <h1 class="display-4"><center>Our Team</center></h1>
+                <br>
+
+                <div class="gl-row gl-center gl-card gl-padding">
+                    <a href="javascript:void(0)" onclick="openMenu(event, 'Team Members');" id="myLink">
+                        <div class="gl-col s6 tablink">Team Members</div>
+                    </a>
+                    <a href="javascript:void(0)" onclick="openMenu(event, 'Mentors');">
+                        <div class="gl-col s6 tablink">Mentors</div>
+                    </a>
+                </div>
+
+                <div id="Team Members" class="gl-container menu gl-padding-48 gl-card">
+                    <div class="row">
+                        <div class="column">
+                            <div class="card">
+                                <img src="/media/Aryan.jpeg" alt="Aryan" style="width:100%">
+                                <div class="container">
+                                    <h4>Aryan Kumar</h4>
+                                    <p>A person possessing leadership qualities and always willing to learn attitude!
+                                    </p>
+                                    <p><button class="button"><a href="mailto:aryankr730@gmail.com"
+                                                style="text-decoration: none;">Contact
+                                                me!</a></button></p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="column">
+                            <div class="card">
+                                <img src="/media/Krishnakant.jpeg" alt="Krishnakant" style="width:100%">
+                                <div class="container">
+                                    <h5>Krishnakant Vishwakarma</h5>
+                                    <p>A helping, focused, plan-driven & travel-holic person &nbsp;
+                                        &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;
+                                        &nbsp;&nbsp;&nbsp; </p>
+                                    <p><button class="button"><a href="mailto:krishnakant7567@gmail.com"
+                                                style="text-decoration: none;">Contact me!</a></button></p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="column">
+                            <div class="card">
+                                <img src="/media/Ritika.jpg" alt="Ritika" style="width:100%">
+                                <div class="container">
+                                    <h4>Ritika Singh</h4>
+                                    <p>A person possessing good communication and time-management skill. </p>
+                                    <p><button class="button"><a href="mailto:ritikasaloni12@gmail.com"
+                                                style="text-decoration: none;">Contact me!</a></button></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="column">
+                            <div class="card">
+                                <img src="/media/Saurabh.jpg" alt="Saurabh" style="width:100%">
+                                <div class="container">
+                                    <h4>Saurabh Kumar</h4>
+                                    <p>A plan-driven, hard-working and focused person! &nbsp;&nbsp;&emsp;</p>
+                                    <p><button class="button"><a href="mailto:saurabhgrd12@gmail.com"
+                                                style="text-decoration: none;">Contact
+                                                me!</a></button></p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="column">
+                            <div class="card">
+                                <img src="/media/Shahnawaz.jpeg" alt="Shahnawaz" style="width:100%">
+                                <div class="container">
+                                    <h4>Shahnawaz Alam</h4>
+                                    <p>A hard-working, resourceful and focused individual!</p>
+                                    <p><button class="button"><a href="mailto:iamshahnawaz7@gmail.com"
+                                                style="text-decoration: none;">Contact me!</a></button></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="Mentors" class="gl-container menu gl-padding-48 gl-card">
+                    <div class="row">
+                        <div class="column">
+                            <div class="card">
+                                <!-- <img src="/media/Aryan.jpeg" alt="Aryan" style="width:100%"> -->
+                                <div class="container">
+                                    <h4>Nishant Kumar</h4>
+                                    <p class="title">Mentor</p>
+                                    <p>Made up the team and assigned the tasks to be done. &nbsp; &nbsp;&nbsp;&nbsp;
+                                        &nbsp;&nbsp</p>
+                                    <p><button class="button"><a href="mailto:nishant7.k@tcs.com"
+                                                style="text-decoration: none;">Contact
+                                                me!</a></button></p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="column">
+                            <div class="card">
+                                <!-- <img src="/media/Krishnakant.jpeg" alt="Krishnakant" style="width:100%"> -->
+                                <div class="container">
+                                    <h4>Bhavik Jadav</h4>
+                                    <p class="title">Lead</p>
+                                    <p>Conducted daily standup meeting and provided with all the necessary inputs</p>
+                                    <p><button class="button"><a href="mailto:bhavik.yadav@tcs.com"
+                                                style="text-decoration: none;">Contact
+                                                me!</a></button></p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="column">
+                            <div class="card">
+                                <!-- <img src="/media/Ritika.jpg" alt="Ritika" style="width:100%"> -->
+                                <div class="container">
+                                    <h4>Revanth Kalluri</h4>
+                                    <p class="title">Lead</p>
+                                    <p>Conducted daily standup meeting and provided with all the necessary inputs</p>
+                                    <p><button class="button"><a href="mailto:revanth.kalluri@tcs.com"
+                                                style="text-decoration: none;">Contact me!</a></button></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="column">
+                            <div class="card">
+                                <!-- <img src="/media/Saurabh.jpg" alt="Saurabh" style="width:100%"> -->
+                                <div class="container">
+                                    <h4>Ramya Ramapriyan</h4>
+                                    <p class="title">OffShore SPOC</p>
+                                    <p>Helped with all the technical aspects of the project &nbsp; &nbsp;&nbsp;&nbsp;
+                                        &nbsp;&nbsp &nbsp;
+                                    </p>
+                                    <p><button class="button"><a href="mailto:ramya.ramapriyan@tcs.com"
+                                                style="text-decoration: none;">Contact me!</a></button></p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="column">
+                            <div class="card">
+                                <!-- <img src="/media/Shahnawaz.jpeg" alt="Shahnawaz" style="width:100%"> -->
+                                <div class="container">
+                                    <h4>Praveen Chandran</h4>
+                                    <p class="title">Regional Head-AIP(Karnataka)</p>
+                                    <p>Helped with all the formalities of onboarding</p>
+                                    <p><button class="button"><a href="mailto:praveenc.v@tcs.com"
+                                                style="text-decoration: none;">Contact
+                                                me!</a></button></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <script>
+        // Tabbed Menu
+        function openMenu(evt, menuName) {
+            var i, x, tablinks;
+            x = document.getElementsByClassName("menu");
+            for (i = 0; i < x.length; i++) {
+                x[i].style.display = "none";
+            }
+            tablinks = document.getElementsByClassName("tablink");
+            for (i = 0; i < x.length; i++) {
+                tablinks[i].className = tablinks[i].className.replace(" gl-dark-grey", "");
+            }
+            document.getElementById(menuName).style.display = "block";
+            evt.currentTarget.firstElementChild.className += " gl-dark-grey";
+        }
+        document.getElementById("myLink").click();
+    </script>
+    <!-- </body>
+     
+    </html> -->
+    {% endblock content %}

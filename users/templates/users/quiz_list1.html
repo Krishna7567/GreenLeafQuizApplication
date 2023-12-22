@@ -1,0 +1,67 @@
+{% extends "users/base.html" %}
+
+{% block title %}Review Page {% endblock title%}
+
+{% block content %}
+<div class="jumbotron bg-light text-left">
+    <h1 class="display-4">Review Quizzes</h1>
+    <a href="{% url 'add-quiz1' %}" class="btn btn-sm btn-primary"> Add Quiz</a>
+    <hr class="my-4">
+    {% for quiz, questions in quiz_question_dict.items %}
+    <div class="card mb-3">
+        <div class="card-header bg-primary text-white">
+            <div class="d-flex justify-content-between align-items-center">
+                <span class="h4">Quiz. {{ quiz.name }}</span>
+                <div>
+                    <a href="{% url 'edit_quiz' quiz.id %}" class="btn btn-sm btn-primary"><i class="fas fa-pencil-alt"></i> Edit Quiz</a>
+                    <form class="d-inline-block" action="{% url 'delete_quiz1' quiz.id %}" method="POST" onsubmit="return confirm('Are you sure you want to delete this quiz?');">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-sm btn-danger"><i class="fas fa-trash-alt"></i> Delete</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="card-body">
+            <ul class="list-group">
+                {% for question in questions %}
+                <li class="list-group-item">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <h5 class="card-title mb-0">{{ forloop.counter }}. {{ question.text }}</h5>
+                        <div>
+                          
+                            <a href="{% url 'edit_question' question.id %}" class="btn btn-sm btn-primary"><i class="fas fa-pencil-alt"></i> Edit Question and Answers</a>
+                            <!-- <a href="#" class="btn btn-sm btn-primary"><i class="fas fa-pencil-alt"></i> Edit</a> -->
+                            <form class="d-inline-block" action="{% url 'delete_question1' quiz_id=quiz.id question_id=question.id %}" method="POST" onsubmit="return confirm('Are you sure you want to delete this question?');">
+                                {% csrf_token %}
+                                <button type="submit" class="btn btn-sm btn-danger"><i class="fas fa-trash-alt"></i> Delete</button>
+                            </form>
+                        </div>
+                    </div>
+                    <ul class="list-unstyled mt-3">
+                        {% for answer in question.answer_set.all %}
+                        <li>
+                            <div class="form-check">
+                                
+                                <!-- <input class="form-check-input" type="radio" id="answer_{{ answer.id }}" name="question_{{ question.id }}" value="{{ answer.id }}"> -->
+                                <label class="form-check-label" for="answer_{{ answer.id }}">Option {{ forloop.counter }} - {{ answer.text }}</label>
+                            </div>
+                        </li>
+                        {% endfor %}
+                        <br>Question Marks: {{ question.marks }}</br>
+                        <br>Explanation: {{ question.explanation }}</br>
+
+                        <details>
+                            <summary>Read more:</summary>
+                            <p>{{ question.lmore }}</p>
+                          </details>
+                          
+                    </ul>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+    <hr class="my-4">
+    {% endfor %}
+</div>
+{% endblock content %}

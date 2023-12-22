@@ -1,0 +1,43 @@
+/* Custom radio button style */
+.myradio__input[type="radio"] {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.myradio__label {
+  display: inline-block;
+  position: relative;
+  padding-left: 30px;
+  margin-right: 15px;
+  font-size: 17px;
+  cursor: pointer;
+}
+
+.myradio__label:before {
+  content: "";
+  display: inline-block;
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 18px;
+  height: 18px;
+  border: 2px solid #ccc;
+  border-radius: 50%;
+}
+
+.myradio__input:checked + .myradio__label:before {
+  border-color: #010203;
+  background-color: #C7F2A4;
+}
+
+/* Add animation effect */
+.myradio__label:before {
+  -webkit-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+}
+
+.myradio__input:checked + .myradio__label:before {
+  -webkit-transform: scale(1.1);
+  transform: scale(1.1);
+}

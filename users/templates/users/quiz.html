@@ -1,0 +1,105 @@
+{% extends "users/base.html" %}
+
+{% block title %} {{ quiz.name }} {% endblock title%}
+
+{% block content %}
+{% load static %}
+<div class="jumbotron bg-light text-left">
+	{% if user.is_authenticated %}
+	<title>{{ quiz.name }}</title>
+	<!-- Add Bootstrap CSS -->
+	<!-- <link rel="stylesheet" href="{% static 'style.css' %}"> -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/css/bootstrap.min.css">
+	<link href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css' rel='stylesheet'>
+	<link rel="stylesheet" href="{% static 'styles/quiz.css' %}">
+	<h1 class="display-5 text-left">Quiz {{ quiz.name }}</h1>
+	<p class="lead text-left">Total marks for this quiz: {{ total_marks }}</p>
+	{% if user.is_staff or user.is_superuser %}
+	<a href="{% url 'add-question' quiz.id %}" class="btn btn-secondary">Add Question</a>
+	{% endif %}
+	<hr class="my-4">
+	<form id="quiz-form" method="post" action="{% url 'quiz' quiz.id %}">
+		{% csrf_token %}
+		{% for question in questions %}
+		<div class="card my-5">
+			<div class="card-body">
+				<h2 class="card-title">{{ forloop.counter }}. {{ question.text }}</h2>
+				<div class="text-right">
+					<strong>Marks {{ question.marks }}</strong>
+				</div>
+				<!-- <strong>Marks  {{ question.marks }}</strong> -->
+				{% for answer in question.answer_set.all %}
+				<div class="form-check">
+					<label class="form-check-label">
+						<div class="myradio">
+							<input type="radio" id="answer_{{ answer.id }}" name="question_{{ question.id }}"
+								value="{{ answer.id }}" class="myradio__input">
+							<label for="answer_{{ answer.id }}" class="myradio__label">{{ answer.text }}</label>
+						</div>
+					</label>
+				</div>
+				{% endfor %}
+				{% if user.is_staff or user.is_superuser %}
+				<a href="{% url 'delete_question' quiz_id=quiz.id question_id=question.id %}"
+					class="btn btn-danger btn-sm"><i class="fas fa-trash-alt"></i></a>
+				{% endif %}
+			</div>
+		</div>
+		{% endfor %}
+		<div class="text-center">
+			<input type="submit" value="Submit" class="btn btn-primary">
+			<hr class="my-4">
+		</div>
+	</form>
+</div>
+<!-- Add Bootstrap JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/js/bootstrap.min.js"></script>
+
+{% if user.is_authenticated %}
+<script>
+	var timeRemaining = 120; // 2 minutes in seconds
+	var countdownTimer = setInterval(updateTimer, 1000);
+
+	function updateTimer() {
+		timeRemaining -= 1;
+		document.getElementById("timer").innerText = formatTime(timeRemaining);
+
+		if (timeRemaining <= 0) {
+			clearInterval(countdownTimer);
+			document.getElementById("quiz-form").submit();
+		}
+	}
+
+	// Add timer display element
+	var timerElement = document.createElement("p");
+	timerElement.id = "timer";
+	document.getElementById("quiz-form").prepend(timerElement);
+
+	// Apply CSS styles to position and style the timer element
+	timerElement.style.position = "fixed";
+	timerElement.style.left = "20px";
+	timerElement.style.top = "20px";
+	timerElement.style.backgroundColor = "#fff";
+	timerElement.style.padding = "10px";
+	timerElement.style.borderRadius = "4px";
+	timerElement.style.zIndex = "999";
+	timerElement.style.fontFamily = "Arial, sans-serif";
+	timerElement.style.fontSize = "16px";
+
+	function formatTime(timeInSeconds) {
+		var hours = Math.floor(timeInSeconds / 3600);
+		var minutes = Math.floor((timeInSeconds % 3600) / 60);
+		var seconds = timeInSeconds % 60;
+
+		return padZero(hours) + ":" + padZero(minutes) + ":" + padZero(seconds);
+	}
+
+	function padZero(number) {
+		return number.toString().padStart(2, "0");
+	}
+</script>
+{% endif %}
+
+{% endif %}
+
+{% endblock content %}

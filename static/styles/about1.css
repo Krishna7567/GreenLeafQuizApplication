@@ -1,0 +1,29 @@
+p {
+    text-align: justify;
+}
+
+.outer {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    /* padding: 1em; */
+    padding-top: 1em;
+}
+
+.wrap {
+    width: 100%;
+    background: #fff;
+    border-radius: 1em;
+    overflow: hidden;
+    padding: 42px 55px 45px;
+}
+
+.contact-title {
+    display: block;
+    font-size: 38px;
+    line-height: 1.2;
+    text-align: center;
+    padding-bottom: 0.6em;
+}

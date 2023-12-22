@@ -1,0 +1,20 @@
+
+{% extends "users/base.html" %}
+{% block title %} Delete Question {% endblock title%}
+{% block content %}
+    <div class="jumbotron">
+        </p>
+        <hr class="my-4">
+        <p class="lead">
+        <h1>Delete Question</h1>
+        <h2>{{ question.text }}</h2>
+            <p>Are you sure you want to delete this question?</p>
+                <form method="post">
+                {% csrf_token %}
+                    <input type="submit" value="Yes">
+                    <a href="{% url 'quiz' quiz.id %}">No</a>
+                    </form>
+                </p>
+            </div>
+           <!-- btn btn-primary btn-lg -->
+        {% endblock content %}

@@ -1,0 +1,23 @@
+{% extends "users/base.html" %}
+{% load static %}
+{% block title %}Logout{% endblock title %}
+{% block css %}
+<link rel="stylesheet" href="{% static 'styles/logout.css' %}">
+{% endblock %}
+{% block content %}
+<div class="card center1" style="width: 20rem;">
+    <div class="card-body ">
+        <h5 class="card-title center-p">You have been logged out</h5>
+        <p class="card-text center-p">
+            Thank you for your time.
+        </p>
+        <br>
+        <hr>
+        <div class="text-center">
+            <a href="{% url 'login' %}" class="btn
+                btn-outline-secondary">Sign
+                in again</a>
+        </div>
+    </div>
+</div>
+{% endblock content %}

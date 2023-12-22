@@ -1,0 +1,58 @@
+{% extends "users/base.html" %} 
+ 
+{% block title %} Add Answers {% endblock title%}
+ 
+{% block content %} 
+<div class="jumbotron bg-light text-left">
+  <h1 class="display-4">Welcome, {{user.first_name.title|default:'Guest'}}</h1>
+  <hr class="my-4">
+  <p class="lead">
+    <form method="POST" id="answer-form"> 
+      {% csrf_token %} 
+      <div id="answer-options">
+        <div class="form-group answer-option">
+          <label for="answer1">Option 1:</label>
+          <input type="text" class="form-control" name="answer1" id="answer1" required>
+          <div class="form-check">
+            <input type="checkbox" class="form-check-input" name="is_correct1" id="is_correct1">
+            <label class="form-check-label" for="is_correct1">Correct Answer</label>
+          </div>
+        </div>
+        <div class="form-group answer-option">
+          <label for="answer2">Option 2:</label>
+          <input type="text" class="form-control" name="answer2" id="answer2" required>
+          <div class="form-check">
+            <input type="checkbox" class="form-check-input" name="is_correct2" id="is_correct2">
+            <label class="form-check-label" for="is_correct2">Correct Answer</label>
+          </div>
+        </div>
+      </div>
+      <br>
+      <button class="btn btn-secondary" id="add-answer">Add Answer Option</button>
+      <button class="btn btn-primary" type="submit">Submit</button>
+    </form>
+  </p>
+</div>
+ 
+{% block scripts %}
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+$(document).ready(function() {
+  $('#add-answer').click(function() {
+    var numOptions = $('#answer-options .answer-option').length;
+    if (numOptions >= 5) {
+      alert('You can only add up to 5 answer options.');
+      return;
+    }
+    var newOption = $('<div>').addClass('form-group answer-option');
+    var newLabel = $('<label>').addClass('mt-2').attr('for', 'answer' + (numOptions + 1)).text('Option ' + (numOptions + 1) + ':');
+    var newInput = $('<input>').addClass('form-control').attr({'type': 'text', 'name': 'answer' + (numOptions + 1), 'id': 'answer' + (numOptions + 1), 'required': 'required'});
+    var newCheckbox = $('<input>').addClass('form-check-input').attr({'type': 'checkbox', 'name': 'is_correct' + (numOptions + 1), 'id': 'is_correct' + (numOptions + 1)});
+    var newCheckLabel = $('<label>').addClass('form-check-label').attr('for', 'is_correct' + (numOptions + 1)).text('Correct Answer');
+    newOption.append(newLabel, newInput, $('<div>').addClass('form-check').append(newCheckbox, newCheckLabel));
+    $('#answer-options').append(newOption);
+  });
+});
+</script>
+{% endblock %}
+{% endblock content %}
